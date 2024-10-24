@@ -41,19 +41,8 @@ namespace TicTacToe
 
                
                 Writer.WriteLine(userName);
+                
 
-                //string msgChoise = Reader.ReadLine();
-                //var msgChoise = "Выберите X или O";
-                //Console.WriteLine(msgChoise);
-                //string choise = Console.ReadLine().ToUpper();
-                //while (choise != "X" && choise !="O")
-                //{
-                //    Console.WriteLine(msgChoise);
-                //    choise = Console.ReadLine().ToUpper();
-                //}
-
-
-                // Writer.WriteLine(choise);
                
 
                 var msgNumber = Reader.ReadLine();

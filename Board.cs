@@ -75,8 +75,8 @@ namespace TicTacToe
 
         private Cell GetCell(string hod)
         {
-            var i = hod[0] == 'a' ? 0 : hod[0] == 'b' ? 1 : 2;
-            var j = hod[1] == '1' ? 0 : hod[1] == '2' ? 1 : 2;
+            var j = hod[0] == 'a' ? 0 : hod[0] == 'b' ? 1 : 2;
+            var i = hod[1] == '1' ? 0 : hod[1] == '2' ? 1 : 2;
             return CellMas[i, j];
         }
 
