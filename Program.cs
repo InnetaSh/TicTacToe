@@ -6,30 +6,41 @@ namespace TicTacToe
 {
     internal class Program
     {
-
         static void Main(string[] args)
         {
+             Game();
+        }
+        static  void Game()
+        {
+            
+
+
             Console.Write("Введите свое имя: ");
             string? userName = Console.ReadLine();
 
-            using TcpClient tcpClient = new TcpClient();
-            Console.WriteLine($"Игрок {userName} подключился");
-            tcpClient.Connect("127.0.0.1", 13000);
+
+            string serverIp = "25.28.51.91";
+            int port = 12345;
+
+            TcpClient tcpClient = new TcpClient(serverIp, port);
+
 
             var stream = tcpClient.GetStream();
-            StreamReader? Reader = null;
-            StreamWriter? Writer = null;
+            StreamReader? Reader = new StreamReader(stream);
+            StreamWriter? Writer = new StreamWriter(stream) { AutoFlush = true };
 
             if (tcpClient.Connected)
             {
+                
 
-                Reader = new StreamReader(tcpClient.GetStream());
-                Writer = new StreamWriter(tcpClient.GetStream());
+                Console.WriteLine($"Игрок {userName} подключился");
+                Thread.Sleep(1000);
+               
                 if (Writer is null || Reader is null) return;
 
 
-
-
+               
+                Writer.WriteLine(userName);
 
                 Board board = new Board("X");
                 board.Print();
@@ -50,13 +61,9 @@ namespace TicTacToe
 
                         else
                         {
+                            Writer.WriteLine(hod);
+                            Writer.Flush();
                            
-                            byte[] hodData = Encoding.UTF8.GetBytes(hod);
-                            stream.Write(hodData, 0, hodData.Length);
-
-
-
-
 
                             Console.Clear();
                             board.Print();
@@ -73,16 +80,8 @@ namespace TicTacToe
 
                     while (true)
                     {
-                        //Console.WriteLine("Введите ход игрок 2");
-                        //string Hod2 = Console.ReadLine();
-
-
-                        byte[] buffer = new byte[256];
-
-                        int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                        string hod2 = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                     
-
+                        
+                        string hod2 =  Reader.ReadLine();
 
 
                         var msg2 = board.Move(hod2, false);
@@ -105,6 +104,9 @@ namespace TicTacToe
                         break;
                     }
                 }
+
+                stream.Close();
+                tcpClient.Close();
             }
 
             else
