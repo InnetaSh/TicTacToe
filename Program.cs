@@ -42,80 +42,172 @@ namespace TicTacToe
                
                 Writer.WriteLine(userName);
 
-                string msgChoise = Reader.ReadLine();
-                Console.WriteLine(msgChoise);
-                string choise = Console.ReadLine().ToUpper();
-                while (choise != "X" && choise !="O")
+                //string msgChoise = Reader.ReadLine();
+                //var msgChoise = "Выберите X или O";
+                //Console.WriteLine(msgChoise);
+                //string choise = Console.ReadLine().ToUpper();
+                //while (choise != "X" && choise !="O")
+                //{
+                //    Console.WriteLine(msgChoise);
+                //    choise = Console.ReadLine().ToUpper();
+                //}
+
+
+                // Writer.WriteLine(choise);
+               
+
+                var msgNumber = Reader.ReadLine();
+                var num = Reader.ReadLine();
+
+                Console.WriteLine(msgNumber);
+                Console.Write(num);
+                string choise;
+                if (num == "X")
                 {
-                    Console.WriteLine(msgChoise);
-                    choise = Console.ReadLine().ToUpper();
+                     choise = "X";
                 }
-                Writer.WriteLine(choise);
+                else
+                {
+                    choise = "O";
+                }
 
                 Board board = new Board(choise);
                 board.Print();
 
-                while (true)
+
+
+                if (choise == "X")
                 {
-
                     while (true)
                     {
-                        Console.WriteLine("Введите ход игрок 1");
-                        string hod = Console.ReadLine();
-                        var msg = board.Move(hod, true);
-                        if (!String.IsNullOrEmpty(msg))
+
+                        while (true)
                         {
-                            Console.WriteLine(msg);
-                            Console.WriteLine("Повторите ход");
+                            Console.WriteLine("Введите ход игрок 1");
+                            string hod = Console.ReadLine();
+                            var msg = board.Move(hod, true);
+                            if (!String.IsNullOrEmpty(msg))
+                            {
+                                Console.WriteLine(msg);
+                                Console.WriteLine("Повторите ход");
+                            }
+
+                            else
+                            {
+                                Writer.WriteLine(hod);
+                                Writer.Flush();
+
+
+                                Console.Clear();
+                                board.Print();
+                                break;
+                            }
+                        }
+                        if (board.WinLogic())
+                        {
+                            var msgWin = "Победил игрок 1";
+                            Writer.WriteLine(msgWin);
+                            Console.WriteLine(msgWin);
+                            break;
                         }
 
-                        else
-                        {
-                            Writer.WriteLine(hod);
-                            Writer.Flush();
-                           
 
-                            Console.Clear();
-                            board.Print();
+
+                        while (true)
+                        {
+
+                            string msgHod2 = Reader.ReadLine();
+                            string hod2 = Reader.ReadLine();
+
+
+                            var msg2 = board.Move(hod2, false);
+                            if (!String.IsNullOrEmpty(msg2))
+                            {
+                                Console.WriteLine(msg2);
+                                Console.WriteLine("Повторите ход");
+                            }
+
+                            else
+                            {
+                                Console.Clear();
+                                board.Print();
+                                break;
+                            }
+                        }
+                        if (board.WinLogic())
+                        {
+                            var msgWin = "Победил игрок 2";
+                            Writer.WriteLine(msgWin);
+                            Console.WriteLine(msgWin);
                             break;
                         }
                     }
-                    if (board.WinLogic())
-                    {
-                        var msgWin = "Победил игрок 1";
-                        Writer.WriteLine(msgWin);
-                        Console.WriteLine(msgWin);
-                        break;
-                    }
+                }
 
-
-
+                else
+                {
                     while (true)
                     {
-                        
-                        string hod2 =  Reader.ReadLine();
 
-
-                        var msg2 = board.Move(hod2, false);
-                        if (!String.IsNullOrEmpty(msg2))
+                        while (true)
                         {
-                            Console.WriteLine(msg2);
-                            Console.WriteLine("Повторите ход");
+
+                            string msgHod2 = Reader.ReadLine();
+                            string hod2 = Reader.ReadLine();
+
+
+                            var msg2 = board.Move(hod2, false);
+                            if (!String.IsNullOrEmpty(msg2))
+                            {
+                                Console.WriteLine(msg2);
+                                Console.WriteLine("Повторите ход");
+                            }
+
+                            else
+                            {
+                                Console.Clear();
+                                board.Print();
+                                break;
+                            }
                         }
-
-                        else
+                        if (board.WinLogic())
                         {
-                            Console.Clear();
-                            board.Print();
+                            var msgWin = "Победил игрок 2";
+                            Writer.WriteLine(msgWin);
+                            Console.WriteLine(msgWin);
                             break;
                         }
-                    }
-                    if (board.WinLogic())
-                    {
-                        var msgWin = "Победил игрок 2";
-                        Writer.WriteLine(msgWin);
-                        Console.WriteLine(msgWin);
-                        break;
+
+                        while (true)
+                        {
+                            Console.WriteLine("Введите ход игрок 2");
+                            string hod = Console.ReadLine();
+                            var msg = board.Move(hod, true);
+                            if (!String.IsNullOrEmpty(msg))
+                            {
+                                Console.WriteLine(msg);
+                                Console.WriteLine("Повторите ход");
+                            }
+
+                            else
+                            {
+                                Writer.WriteLine(hod);
+                                Writer.Flush();
+
+
+                                Console.Clear();
+                                board.Print();
+                                break;
+                            }
+                        }
+                        if (board.WinLogic())
+                        {
+                            var msgWin = "Победил игрок 1";
+                            Writer.WriteLine(msgWin);
+                            Console.WriteLine(msgWin);
+                            break;
+                        }
+
                     }
                 }
 
