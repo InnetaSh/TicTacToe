@@ -42,7 +42,17 @@ namespace TicTacToe
                
                 Writer.WriteLine(userName);
 
-                Board board = new Board("X");
+                string msgChoise = Reader.ReadLine();
+                Console.WriteLine(msgChoise);
+                string choise = Console.ReadLine().ToUpper();
+                while (choise != "X" && choise !="O")
+                {
+                    Console.WriteLine(msgChoise);
+                    choise = Console.ReadLine().ToUpper();
+                }
+                Writer.WriteLine(choise);
+
+                Board board = new Board(choise);
                 board.Print();
 
                 while (true)
@@ -72,7 +82,9 @@ namespace TicTacToe
                     }
                     if (board.WinLogic())
                     {
-                        Console.WriteLine("Победил игрок 1");
+                        var msgWin = "Победил игрок 1";
+                        Writer.WriteLine(msgWin);
+                        Console.WriteLine(msgWin);
                         break;
                     }
 
@@ -100,7 +112,9 @@ namespace TicTacToe
                     }
                     if (board.WinLogic())
                     {
-                        Console.WriteLine("Победил игрок 2");
+                        var msgWin = "Победил игрок 2";
+                        Writer.WriteLine(msgWin);
+                        Console.WriteLine(msgWin);
                         break;
                     }
                 }
